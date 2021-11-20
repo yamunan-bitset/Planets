@@ -30,9 +30,9 @@ void init()
 
 void render()
 {
-  //  std::srand(std::time(NULL));
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glDepthMask(GL_DEPTH_TEST);
+  /* 2D rendering 
   glDisable(GL_DEPTH_TEST);
   glDisable(GL_LIGHTING);
 
@@ -57,6 +57,7 @@ void render()
     glEnd();
   }
   glPopMatrix();
+  */
   glDepthMask(GL_TRUE);
   glEnable(GL_DEPTH_TEST);
 
@@ -80,7 +81,7 @@ void render()
   {
     GLfloat qaLightPosition[] = { 1, 1, 1, 1 };
     glLightfv(GL_LIGHT0, GL_POSITION, qaLightPosition);
-    GLfloat emitLight[] = {0.9, 0.9, 0.9, 0.9};
+    GLfloat emitLight[] = { 0.9, 0.9, 0.9, 0.9 };
     glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emitLight);
     glutSolidSphere(radius, 25, 25);
     GLfloat Noemit[] = { 0.0, 0.0, 0.0, 1.0 };
@@ -88,6 +89,19 @@ void render()
   }
   glPopMatrix();
 
+  glTranslatef(10.0f, 0.0f, -40.0f);
+  glPushMatrix();
+  {
+    GLfloat qaLightPosition[] = { 1, 1, 1, 1 };
+    glLightfv(GL_LIGHT0, GL_POSITION, qaLightPosition);
+    GLfloat emitLight[] = { 0.9, 0.9, 0.9, 0.9 };
+    glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emitLight);
+    glutSolidSphere(radius / 8, 25, 25);
+    GLfloat Noemit[] = { 0.0, 0.0, 1.0, 1.0 };
+    glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, Noemit);
+  }
+  glPopMatrix();
+  
   glPushMatrix();
   {
     glRotatef(yrot, 0.0, 2.0, 0.0);
@@ -95,6 +109,7 @@ void render()
     glutSolidSphere(radius / 6, 25, 25);
   }
   glPopMatrix();
+  
   glutSwapBuffers();
 }
 
