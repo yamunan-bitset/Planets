@@ -1,2 +1,3 @@
-# AnimBG
-Animated Backgrounds written with GLUT
+# Planets
+
+Planet Simulations

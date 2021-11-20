@@ -30,7 +30,7 @@ void init()
 
 void render()
 {
-  std::srand(std::time(NULL));
+  //  std::srand(std::time(NULL));
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glDepthMask(GL_DEPTH_TEST);
   glDisable(GL_DEPTH_TEST);
@@ -78,7 +78,13 @@ void render()
 
   glPushMatrix();
   {
+    GLfloat qaLightPosition[] = { 1, 1, 1, 1 };
+    glLightfv(GL_LIGHT0, GL_POSITION, qaLightPosition);
+    GLfloat emitLight[] = {0.9, 0.9, 0.9, 0.9};
+    glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emitLight);
     glutSolidSphere(radius, 25, 25);
+    GLfloat Noemit[] = { 0.0, 0.0, 0.0, 1.0 };
+    glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, Noemit);
   }
   glPopMatrix();
 
@@ -86,13 +92,7 @@ void render()
   {
     glRotatef(yrot, 0.0, 2.0, 0.0);
     glTranslatef(5.0, 0.0, 0.0);
-    GLfloat qaLightPosition[] = { 1, 1, 1, 1 };
-    glLightfv(GL_LIGHT0, GL_POSITION, qaLightPosition);
-    GLfloat emitLight[] = {0.9, 0.9, 0.9, 0.9};
-    glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emitLight);
     glutSolidSphere(radius / 6, 25, 25);
-    GLfloat Noemit[] = { 0.0, 0.0, 0.0, 1.0 };
-    glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, Noemit);
   }
   glPopMatrix();
   glutSwapBuffers();
@@ -108,7 +108,7 @@ int main(int argc, char** argv)
   glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
   glutInitWindowSize(ra.width, ra.height);
   init();
-  glutCreateWindow("Animbg");
+  glutCreateWindow("Planets");
   glutDisplayFunc(render);
   glutTimerFunc(0, timer, 0);
   glutMainLoop();
